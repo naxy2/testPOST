@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 
 app.post('/post/', (req, res) => {
     if (req.body.key == psw){
-        console.log(req.body.text);
+        console.log("Arrivato: " + eq.body.text);
         res.sendStatus(200);
     }else{
         res.sendStatus(401);

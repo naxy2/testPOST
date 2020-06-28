@@ -14,6 +14,10 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+app.get('/pagina', (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "pagina.html"));
+});
+
 app.post('/post/', (req, res) => {
     if (req.body.key == psw){
         console.log("Arrivato: " + req.body.text);

@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>TEST POST</title>
+        <script type="text/javascript">
+            function manda(){
+                let data = {
+                    text: "ciao"
+                };
+                let options = {
+                    method:'POST', 
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                };
+                fetch("/post", options)
+                    .then(res=>{
+                        //console.log(res);
+                    });
+            }
+        </script>
+    </head>
+    <body>
+        <h1>CIAO</h1>
+        <button onclick="manda()">INVIA MESSAGGIO</button>
+    </body>
+</html>

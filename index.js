@@ -1,6 +1,7 @@
 const express = require('express');
 var path = require('path');
 const bodyParser = require('body-parser');
+const psw = "qwerty";
 
 const app = express();
 const port = 3000;
@@ -14,8 +15,12 @@ app.get('/', (req, res) => {
 });
 
 app.post('/post/', (req, res) => {
-    console.log(req.body);
-    res.sendStatus(200);
+    if (req.body.key == psw){
+        console.log(req.body.text);
+        res.sendStatus(200);
+    }else{
+        res.sendStatus(401);
+    }
     res.end();
 });
 

@@ -6,6 +6,7 @@
             function manda(){
                 let data = {
                     key: "qwerty",
+                    nick: document.getElementById("nick").value,
                     text: document.getElementById("testo").value
                 };
                 let options = {
@@ -25,8 +26,8 @@
     </head>
     <body>
         <h1>CIAO</h1>
+        <input id="nick" type="text" placeholder="nickname"></input>
         <input id="testo" type="text" placeholder="Scrivi qualcosa"></input>
         <button onclick="manda()">INVIA MESSAGGIO</button>
-        <p><a href="/pagina">OwO</a></p>
     </body>
 </html>

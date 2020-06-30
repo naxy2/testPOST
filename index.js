@@ -16,7 +16,6 @@ var data = {messages: []}
 if (fs.existsSync(file)) {
     data = JSON.parse(fs.readFileSync(file));
 }
-console.log(data);
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -38,6 +37,8 @@ app.post('/post/', (req, res) => {
             nick: req.body.nick,
             text: req.body.text
         });
+        while (data.messages.length > 150){data.messages.shift()}
+        
         fs.writeFileSync(file, JSON.stringify(data));
         res.sendStatus(200);
     }else{

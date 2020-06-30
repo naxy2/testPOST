@@ -35,7 +35,7 @@ app.post('/post/', (req, res) => {
         text: req.body.text,
         ip: req.ip
     });
-    while (data.messages.length > 150){data.messages.shift()}
+    while (data.messages.length > process.env.maxMSG){data.messages.shift()}
         
     fs.writeFileSync(file, JSON.stringify(data, null, 2));
     res.sendStatus(200);
@@ -44,7 +44,8 @@ app.post('/post/', (req, res) => {
 
 app.post('/reset/', (req, res) =>{
     if (req.body.key == process.env.resetPSW){
-        fs.writeFileSync(file, JSON.stringify({messages: []} , null, 2));
+        data = {messages: []} 
+        fs.writeFileSync(file, JSON.stringify(data , null, 2));
     }
 });
 

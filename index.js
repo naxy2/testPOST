@@ -2,14 +2,12 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const fs = require("fs");
-const psw = "qwerty";
 const file = "./data.json"
 
 const app = express();
 const port = 3000;
 
-app.use(express.json());  
-app.use(bodyParser.json());       // to support JSON-encoded bodies
+app.use(express.json());
 
 var data = {messages: []} 
 
@@ -30,20 +28,17 @@ app.get('/messaggi', (req, res) => {
 });
 
 app.post('/post/', (req, res) => {
-    if (req.body.key == psw){
-        console.log("Arrivato: " + req.body.text);
-        data.messages.push({
-            time: new Date(),
-            nick: req.body.nick,
-            text: req.body.text
-        });
-        while (data.messages.length > 150){data.messages.shift()}
+    console.log("Arrivato: " + req.body.text);
+    data.messages.push({
+        time: new Date(),
+        nick: req.body.nick,
+        text: req.body.text,
+        ip: req.ip
+    });
+    while (data.messages.length > 150){data.messages.shift()}
         
-        fs.writeFileSync(file, JSON.stringify(data));
-        res.sendStatus(200);
-    }else{
-        res.sendStatus(401);
-    }
+    fs.writeFileSync(file, JSON.stringify(data, null, 2));
+    res.sendStatus(200);
     res.end();
 });
 

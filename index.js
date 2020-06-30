@@ -42,6 +42,12 @@ app.post('/post/', (req, res) => {
     res.end();
 });
 
+app.post('/reset/', (req, res) =>{
+    if (req.body.key == process.env.resetPSW){
+        fs.writeFileSync(file, JSON.stringify({messages: []} , null, 2));
+    }
+});
+
 app.listen(port, () => {
     console.log("Avvio");
 });

@@ -28,7 +28,7 @@ app.get('/messaggi', (req, res) => {
 });
 
 app.post('/post/', (req, res) => {
-    console.log("Arrivato: " + req.body.text);
+    console.log("Arrivato: " + req.body.nick+": "+req.body.text+" "+req.ip);
     data.messages.push({
         time: new Date(),
         nick: req.body.nick,

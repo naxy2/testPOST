@@ -5,7 +5,7 @@ const fs = require("fs");
 const file = "./data.json"
 
 const app = express();
-const port = process.env.port;
+const port = process.env.PORT;
 
 app.use(express.json());
 

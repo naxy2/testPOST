@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const fs = require("fs");
-const file = path.join(__dirname, "data.json")
+const file = path.join(__dirname, "data.json");
 
 const app = express();
 const port = process.env.PORT;
@@ -26,7 +26,9 @@ if (fs.existsSync(file)) {
     data = JSON.parse(fs.readFileSync(file));
     console.log("Trovato file: ", data);
 }else{
-    console.log("File non trovato")
+    console.log("File non trovato");
+    fs.writeFileSync(file, JSON.stringify(data, null, 2));
+    console.log(JSON.parse(fs.readFileSync(file)));
 }
 
 app.get('/', (req, res) => {

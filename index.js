@@ -48,7 +48,7 @@ app.post('/post/', (req, res) => {
     });
     while (data.messages.length > process.env.maxMSG){data.messages.shift()}
         
-    fs.writeFileSync(file, JSON.stringify(data, null, 2));
+    fs.writeFileSync(path.join(__dirname, file), JSON.stringify(data, null, 2));
     res.sendStatus(200);
     res.end();
 });
@@ -56,7 +56,7 @@ app.post('/post/', (req, res) => {
 app.post('/reset/', (req, res) =>{
     if (req.body.key == process.env.resetPSW){
         data = {messages: []} 
-        fs.writeFileSync(file, JSON.stringify(data , null, 2));
+        fs.writeFileSync(path.join(__dirname, file), JSON.stringify(data , null, 2));
     }
 });
 

@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const fs = require("fs");
-const file = "./data.json"
+const file = path.join(__dirname, "data.json")
 
 const app = express();
 const port = process.env.PORT;
@@ -24,6 +24,9 @@ var data = {messages: []}
 
 if (fs.existsSync(file)) {
     data = JSON.parse(fs.readFileSync(file));
+    console.log("Trovato file: ", data);
+}else{
+    console.log("File non trovato")
 }
 
 app.get('/', (req, res) => {
@@ -48,7 +51,8 @@ app.post('/post/', (req, res) => {
     });
     while (data.messages.length > process.env.maxMSG){data.messages.shift()}
         
-    fs.writeFileSync(path.join(__dirname, file), JSON.stringify(data, null, 2));
+    fs.writeFileSync(file, JSON.stringify(data, null, 2));
+    console.log(data)
     res.sendStatus(200);
     res.end();
 });
@@ -56,7 +60,7 @@ app.post('/post/', (req, res) => {
 app.post('/reset/', (req, res) =>{
     if (req.body.key == process.env.resetPSW){
         data = {messages: []} 
-        fs.writeFileSync(path.join(__dirname, file), JSON.stringify(data , null, 2));
+        fs.writeFileSync(file, JSON.stringify(data , null, 2));
     }
 });
 
